@@ -53,7 +53,7 @@ npm i discord.js dotenv mysql2
 
 4. This will create a **package.json** file in your directory with the following dependencies
 
-```
+```javascript
 "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
@@ -65,7 +65,32 @@ Now we start coding:
 
 1. Create an index.js file and import the following:
 
-```
+```javascript
 import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import dotenv from 'dotenv'
+```
+
+2. Create a client, this client is basically our bot and we are giving giving it the paramters it will have access to. _(For example: GatewayIntentBits.GuildMessages allows the bot to have access to the messages sent in the server it is invited to)_
+
+```javascript
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
+		GatewayIntentBits.GuildModeration,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMessageReactions,
+		GatewayIntentBits.DirectMessages,
+	],
+})
+```
+
+3. Login and create a launch your bot
+
+```javascript
+client.on(Events.ClientReady, (c) => {
+	console.log(`Logged in as ${c.user.tag}`)
+})
+
+client.login(process.env.TOKEN)
 ```
