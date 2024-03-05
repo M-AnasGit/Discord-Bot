@@ -19,7 +19,9 @@ First things first we need to first create a discord bot and get its token, to d
 1. Go to https://discord.com/developers/applications
 2. If you are not signed, sign up with your account (or create an account only for development)
 3. Click on the new application button in the top right of the screen
-   ![Fig.1](/assets/new%20application.png)
+
+    ![Fig.1](/assets/new%20application.png)
+
 4. Give your bot a name and agree to the terms and conditions
 
 Congratulations :tada:! You have now created your discord bot, now it is time to invite it to your server and give it the necessary permissions.
@@ -31,7 +33,9 @@ Congratulations :tada:! You have now created your discord bot, now it is time to
 5. Go to **OAuth2**
 6. In the **OAuth2 URL Generator**
 7. Tick the following
-   ![Fig.2](/assets/url_generator.png)
+
+    ![Fig.2](/assets/url_generator.png)
+
 8. In the permissions, give your bot the permissions that he will need for your idea. _(In my case, I just game it admininistrator.)_
 9. Now copy the link in **Generated URL** and paste it in your searchbar and press enter
 10. You will then either prompted to allow the bot into one of your servers.
@@ -44,6 +48,24 @@ Now your bot is all setup but it does not do anything so lets configure it.
 
 ```
 npm init -y
+npm i discord.js dotenv mysql2
 ```
 
-4. This will create a **package.json** file in your directory
+4. This will create a **package.json** file in your directory with the following dependencies
+
+```"dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "mysql2": "^3.9.2"
+  }
+```
+
+Now we start coding:
+
+1. Create an index.js file and import the following:
+
+```
+import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js'
+import dotenv from 'dotenv'
+
+```
