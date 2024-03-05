@@ -135,7 +135,7 @@ node index.js
 
 To see if your bot is correctly working once you node index.js you will have a "Logged in" message in your terminal, if not it means that you need to review your code and follow the steps again.
 
-## How to register users
+## How to implement slash commands
 
 Now that everything is functional it is time to focus on the bread and butter of discord bots, **SLASH COMMANDS**.
 
@@ -244,4 +244,45 @@ node deploy.js
 ```
 
 If you get "Commands deployed" or whatever message you set in the log, it means that you can now node your index file and go to your server and type your command name and you will get this.
+
 ![Fig.5](/assets/test%20commands.png)
+
+Now that the commands are deployed we need to tell our bot how he can interacte with every command to do so we go back to our index file and
+
+1. Create an event listener for interactions
+
+```javascript
+client.on(Events.InteractionCreate, async (interaction) => {})
+```
+
+2. In the event listener we need to filter out the interactions when they are not commands. So that our bot only responds when another user purposefully calls it.
+
+```javascript
+client.on(Events.InteractionCreate, async (interaction) => {
+	if (!interaction.isCommand()) return
+})
+```
+
+3. Now we need to handle every command on its own and to do so, I personally like to use a **switch**. It is a great method to handle the different commands you might have.
+
+```javascript
+client.on(Events.InteractionCreate, async (interaction) => {
+	if (!interaction.isCommand()) return
+	switch (interaction.commandName) {
+		case 'testwithoutoptions':
+			interaction.reply({ content: 'Test without options is working!', ephemeral: true })
+			break
+		case 'testwithoptions':
+			interaction.reply({ content: 'Test with options is working!', ephemeral: true })
+			break
+		default:
+			interaction.reply({ content: 'Unknown command', ephemeral: true })
+	}
+})
+```
+
+Now when noding the index and and using one of the commands we will get the following.
+
+![Fig.6](/assets/test%20command%20live.png)
+
+**_NOTE:_** The note content.
