@@ -7,10 +7,9 @@ This project was built for a **private discord server** and I have got the permi
 Following this project will showcase you how to:
 
 -   Setup a discord bot
--   Handle registering users with their **Riot games** account
+-   Implement slash commands
 -   Implement a **reward system** based on their in-game performance
--   Handle embeds (basics only)
--   Implement a shop
+-   Implement embeds (basics only)
 
 ## How to setup the bot
 
@@ -138,6 +137,112 @@ To see if your bot is correctly working once you node index.js you will have a "
 
 ## How to register users
 
-Now that your bot is functional we need now focus on our main goal, which is making a bot which will track the user's games and give him rewards based on performance but before we should do that, we need to first register the user. and how will you ask ? it is quite simple we will implement
+Now that everything is functional it is time to focus on the bread and butter of discord bots, **SLASH COMMANDS**.
 
-# SLASH COMMANDS
+To register a slash command we need to first...make it!
+
+1. Create a commands.js file in your directory
+
+2. In that file, import the following from discordjs and create an array and export it
+
+```javascript
+import { ApplicationCommandOptionType } from 'discord.js'
+
+export const commands = []
+```
+
+That array will contain the all the command objects that we will need. According to the discord documentation (https://discord.js.org/docs/packages/builders/1.7.0/SlashCommandSubcommandBuilder:Class) the slash command object has 3 main properties:
+
+1. The command name that will be used after the / _(e.g, for /test test is the command name)_.
+
+2. The command description which will display on discord under the name to explain what the command does.
+
+3. The options which will be for example which user are you using the command on or what music are you trying to play in music bots. These options can be optional for commands that do not require it.
+
+With that in mind lets create our first command objects and append it to our array
+
+```javascript
+export const commands = [
+	{
+		name: 'testwithoutoptions',
+		description: 'testing if the command works without options',
+	},
+	{
+		name: 'testwithoptions',
+		description: 'testing if the command works with options',
+		options: [
+			{
+				name: 'name',
+				description: 'username',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			},
+		],
+	},
+]
+```
+
+Now that our commands are created we need to deploy them so that our bot can recognize them.
+
+1. Create a deploy.js file in your directory
+
+2. Import the following, Rest and Routes from discordjs and the commands array from our commands.js file
+
+```javascript
+import { REST, Routes } from 'discord.js'
+import { commands } from './commands.js'
+```
+
+3. Import and configure our environement file
+
+```javascript
+import dotenv from 'dotenv'
+dotenv.config()
+```
+
+4. Create a rest instance from the Rest class and give it the bot's token
+
+```javascript
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN)
+```
+
+Now in order to register the slash commands we will need to get the client_id meaning the id of our bot and the guild_id meaning the id of our server.
+
+This video will explain to you the process of doing this.
+https://www.youtube.com/watch?v=NLWtSHWKbAI
+
+Once you extract the ids store them in the .env file because we will use them to deploy our commands.
+
+1. In deploy.js create a deploy function, this function will be asynchronous and will have a trycatch block inside
+
+```javascript
+const deploy = async () => {
+	try {
+	} catch (error) {
+		console.log('Error deploying commands ', error)
+	}
+}
+```
+
+2. In the try block we will use the rest instance we created alongside the Routes object to deploy our commands in our server and a log at the end to verify if everything worked
+
+```javascript
+const deploy = async () => {
+	try {
+		await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), { body: commands })
+		console.log('Commands deployed')
+	} catch (error) {
+		console.log('Error deploying commands ', error)
+	}
+}
+```
+
+Now you can
+
+```
+node deploy.js
+```
+
+If you get "Commands deployed" or whatever message you set in the log, it means that you can now node your index file and go to your server and type your command name and you will get this.
+
+    ![Fig.5](/assets/test%20commands.png)
