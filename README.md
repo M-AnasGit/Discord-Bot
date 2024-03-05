@@ -244,5 +244,4 @@ node deploy.js
 ```
 
 If you get "Commands deployed" or whatever message you set in the log, it means that you can now node your index file and go to your server and type your command name and you will get this.
-
-    ![Fig.5](/assets/test%20commands.png)
+![Fig.5](/assets/test%20commands.png)
