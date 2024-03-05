@@ -9,7 +9,6 @@ Following this project will showcase you how to:
 -   Setup a discord bot
 -   Implement slash commands
 -   Implement a **reward system** based on their in-game performance
--   Implement embeds (basics only)
 
 ## How to setup the bot
 
@@ -285,4 +284,8 @@ Now when noding the index and and using one of the commands we will get the foll
 
 ![Fig.6](/assets/test%20command%20live.png)
 
-**_NOTE:_** The note content.
+**_NOTE:_** :warning: Instead of having plain interaction replies for these commands you can use whole functions to fetch users or make calculations like I did in the source code provided.
+
+## How to implement the reward based system
+
+In this project I have implemented a reward system based on performance in a league of legends games, you can check it in the source code or build your own depending on whatever game you have or want to use.
