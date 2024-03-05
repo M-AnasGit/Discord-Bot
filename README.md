@@ -67,10 +67,9 @@ Now we start coding:
 
 ```javascript
 import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js'
-import dotenv from 'dotenv'
 ```
 
-2. Create a client, this client is basically our bot and we are giving giving it the paramters it will have access to. _(For example: GatewayIntentBits.GuildMessages allows the bot to have access to the messages sent in the server it is invited to)_
+2. Create a client, this client is basically our bot and we are giving giving it the parameters it will have access to. _(For example: GatewayIntentBits.GuildMessages allows the bot to have access to the messages sent in the server it is invited to)_
 
 ```javascript
 const client = new Client({
@@ -85,7 +84,28 @@ const client = new Client({
 })
 ```
 
-3. Login and create a launch your bot
+3. Now for your code to recognize your bot you created previously you need to use **your bot's token** that is unique and that you **HAVE** to keep secret. and to get it you need to go back to https://discord.com/developers/applications, choose the bot you want, navigate to the bot section and click on reset token
+
+    ![Fig.3](/assets/gettoken.png)
+
+4. Once you have reset the token, copy it
+
+5. To safely store your token so it cannot be accessed you need to use an **environement file**, to do so first create a file named .env
+
+6. In that file create a token variable and give it your token
+
+```.env
+TOKEN=/*yourtokengohere*/
+```
+
+7. To access your token from your environement file, you need to use the dotenv library that we installed previously
+
+```javascript
+import dotenv from 'dotenv'
+dotenv.config()
+```
+
+8. Now you can login and start your bot
 
 ```javascript
 client.on(Events.ClientReady, (c) => {
@@ -93,4 +113,10 @@ client.on(Events.ClientReady, (c) => {
 })
 
 client.login(process.env.TOKEN)
+```
+
+9. It is finally ready you can now
+
+```
+node index.js
 ```
