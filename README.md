@@ -53,7 +53,8 @@ npm i discord.js dotenv mysql2
 
 4. This will create a **package.json** file in your directory with the following dependencies
 
-```"dependencies": {
+```
+"dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "mysql2": "^3.9.2"
@@ -67,5 +68,4 @@ Now we start coding:
 ```
 import { Client, Events, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 import dotenv from 'dotenv'
-
 ```
