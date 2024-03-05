@@ -53,12 +53,25 @@ npm i discord.js dotenv mysql2
 
 4. This will create a **package.json** file in your directory with the following dependencies
 
-```javascript
-"dependencies": {
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1",
-    "mysql2": "^3.9.2"
-  }
+```JSON
+{
+    //@OTHER PACKAGE INFO
+    "dependencies": {
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.3.1",
+        "mysql2": "^3.9.2"
+    }
+}
+```
+
+5. Add to your package.json the following, this will us to use es6 import syntax:
+
+```JSON
+{
+    //OTHER PACKAGE INFO
+    "type": "module",
+    //OTHER INFO
+}
 ```
 
 Now we start coding:
@@ -109,7 +122,7 @@ dotenv.config()
 
 ```javascript
 client.on(Events.ClientReady, (c) => {
-	console.log(`Logged in as ${c.user.tag}`)
+	console.log(`Logged in`)
 })
 
 client.login(process.env.TOKEN)
@@ -120,3 +133,11 @@ client.login(process.env.TOKEN)
 ```
 node index.js
 ```
+
+To see if your bot is correctly working once you node index.js you will have a "Logged in" message in your terminal, if not it means that you need to review your code and follow the steps again.
+
+## How to register users
+
+Now that your bot is functional we need now focus on our main goal, which is making a bot which will track the user's games and give him rewards based on performance but before we should do that, we need to first register the user. and how will you ask ? it is quite simple we will implement
+
+# SLASH COMMANDS
