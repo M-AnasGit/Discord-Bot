@@ -37,3 +37,13 @@ Congratulations :tada:! You have now created your discord bot, now it is time to
 10. You will then either prompted to allow the bot into one of your servers.
 
 Now your bot is all setup but it does not do anything so lets configure it.
+
+1. First we need to create our code directory,_(For the sake of simplicity we will do it the old way)_, create a folder in your pc and name it whatever you want.
+2. Open your IDE of choice, _(I recommend Visual Studio Code for beginners)_, and open the folder you created.
+3. Open the terminal and write
+
+```
+npm init -y
+```
+
+4. This will create a **package.json** file in your directory
